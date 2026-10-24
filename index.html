@@ -283,6 +283,72 @@
     <footer>
         Siga o Gugo no Instagram: <a href="https://www.instagram.com/gugo.app" target="_blank" rel="noopener noreferrer">@gugo.app</a>
     </footer>
+        <!-- Pop-up Dinâmico de Instalação (Android / iOS) -->
+    <div id="install-banner">
+        <p id="install-text">Instale o aplicativo Gugo no seu celular para acesso rápido!</p>
+        <div class="banner-buttons">
+            <button id="install-btn" class="btn-install">Instalar App</button>
+            <button id="close-btn" class="btn-close">Agora não</button>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        Siga o Gugo no Instagram: <a href="https://www.instagram.com/gugo.app" target="_blank" rel="noopener noreferrer">@gugo.app</a>
+    </footer>
+
+    <!-- Script de Gestão do Pop-up de Instalação -->
+    <script>
+        let deferredPrompt;
+        const installBanner = document.getElementById('install-banner');
+        const installBtn = document.getElementById('install-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const installText = document.getElementById('install-text');
+
+        // Detetar se é iOS (iPhone/iPad)
+        const isIOS = /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+        const isInStandaloneMode = ('standalone' in window.navigator) && (window.navigator.standalone);
+
+        // Se for iOS e não estiver instalado ainda, mostra instrução customizada
+        if (isIOS && !isInStandaloneMode) {
+            setTimeout(() => {
+                installText.innerHTML = "Para instalar o Gugo no iPhone: toque no ícone de <b>Compartilhar</b> e escolha <b>'Adicionar à Tela de Início'</b>.";
+                installBtn.style.display = 'none'; // No iOS o navegador bloqueia instalação programática direta
+                installBanner.style.display = 'block';
+            }, 2000);
+        }
+
+        // Para Android / Chrome / Desktop (PWA Nativo)
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            // Mostra o banner após 2 segundos
+            setTimeout(() => {
+                installBanner.style.display = 'block';
+            }, 2000);
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    console.log('Utilizador aceitou instalar o PWA');
+                }
+                deferredPrompt = null;
+                installBanner.style.display = 'none';
+            }
+        });
+
+        closeBtn.addEventListener('click', () => {
+            installBanner.style.display = 'none';
+        });
+
+        window.addEventListener('appinstalled', () => {
+            installBanner.style.display = 'none';
+            console.log('Aplicação instalada com sucesso!');
+        });
+    </script>
 
 </body>
 </html>
