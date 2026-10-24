@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gugo</title>
+
+    <!-- ========================================== -->
+    <!-- 1. GOOGLE ANALYTICS (GA4)                  -->
+    <!-- ========================================== -->
+    <!-- Substitua G-XXXXXXXXXX pelo seu ID de Mensuração do Google -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- ========================================== -->
+    <!-- 2. META PIXEL (FACEBOOK / INSTAGRAM)        -->
+    <!-- ========================================== -->
+    <!-- Substitua SEU_PIXEL_ID pelo ID do seu Meta Pixel -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'SEU_PIXEL_ID');
+      fbq('track', 'PageView');
+    </script>
+    <noscript>
+      <img height="1" width="1" style="display:none"
+           src="https://www.facebook.com/tr?id=SEU_PIXEL_ID&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- ========================================== -->
+
+    <style>
+        /* 1. Cores para o Tema Claro (Padrão) */
+        :root {
+            color-scheme: light dark;
+            --bg-color: #ffffff;
+            --text-color: #202124;
+            --border-color: #dfe1e5;
+            --shadow-color: rgba(32, 33, 36, 0.28);
+            --shadow-focus: rgba(32, 33, 36, 0.39);
+            --btn-bg: #f8f9fa;
+            --btn-border: #f8f9fa;
+            --btn-text: #3c4043;
+            --btn-hover-bg: #f8f9fa;
+            --btn-hover-border: #dadce0;
+            --placeholder-color: #757575;
+        }
+
+        /* 2. Cores para o Tema Escuro (Dark Mode automático) */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #202124;
+                --text-color: #e8eaed;
+                --border-color: #5f6368;
+                --shadow-color: rgba(0, 0, 0, 0.3);
+                --shadow-focus: rgba(0, 0, 0, 0.5);
+                --btn-bg: #303134;
+                --btn-border: #303134;
+                --btn-text: #e8eaed;
+                --btn-hover-bg: #3c4043;
+                --btn-hover-border: #5f6368;
+                --placeholder-color: #9aa0a6;
+            }
+        }
+
+        /* 3. Estilos do Corpo da Página */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 20px;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        /* Container do Logótipo Superior */
+        .logo-container {
+            margin-bottom: 24px;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Logótipo Responsivo */
+        .logo-container img {
+            max-width: 250px;
+            width: 60%;
+            height: auto;
+            display: inline-block;
+        }
+        
+        /* Formulário de Pesquisa */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Caixa de Entrada (Input) */
+        .search-box {
+            width: 100%;
+            max-width: 580px;
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            outline: none;
+            box-shadow: 0 1px 6px var(--shadow-color);
+            transition: box-shadow 0.3s, background-color 0.3s, border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        .search-box::placeholder {
+            color: var(--placeholder-color);
+        }
+        
+        .search-box:focus {
+            box-shadow: 0 1px 6px var(--shadow-focus);
+            border-color: transparent;
+        }
+        
+        /* Botões */
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background-color: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            border-radius: 4px;
+            color: var(--btn-text);
+            font-size: 14px;
+            margin: 6px 4px;
+            padding: 0 16px;
+            line-height: 27px;
+            height: 36px;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        
+        .btn:hover {
+            background-color: var(--btn-hover-bg);
+            border: 1px solid var(--btn-hover-border);
+            color: var(--text-color);
+        }
+
+        /* Container da Imagem Inferior (Banner) */
+        .banner-container {
+            margin-top: 30px;
+            text-align: center;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .banner-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            display: block;
+        }
+
+        /* Ajustes para celulares */
+        @media (max-width: 600px) {
+            .logo-container img {
+                max-width: 180px;
+            }
+            .banner-container {
+                max-width: 320px;
+                margin-top: 20px;
+            }
+            body {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo superior -->
+    <div class="logo-container">
+        <img src="gugo-logo.png" alt="Logo Gugo">
+    </div>
+
+    <!-- Formulário de Pesquisa -->
+    <form action="https://www.google.com/search" method="GET" target="_blank">
+        <input type="text" name="q" class="search-box" placeholder="Pesquise no Gugo ou digite um URL" required>
+        <div class="buttons">
+            <button type="submit" class="btn">Pesquisa Google</button>
+        </div>
+    </form>
+
+    <!-- Imagem Responsiva abaixo do formulário -->
+    <div class="banner-container">
+        <img src="lula-gugo.jpg" alt="Pergunta pro Gugo">
+    </div>
+
+</body>
+</html>
